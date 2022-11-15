@@ -1,6 +1,6 @@
 from typing import TypeVar
-from src.database.entity import Entity
 
+from src.database.entity import Entity
 
 EntityT = TypeVar("EntityT", bound=Entity)
 

@@ -1,6 +1,13 @@
-from pydantic import BaseModel
-from src.accounting.enum import CropTypeEnum, CropGrowTypeEnum, ArtisanGoodsTypeEnum, ProductTypeEnum
 from typing import List
+
+from pydantic import BaseModel
+
+from src.accounting.enum import (
+    ArtisanGoodsTypeEnum,
+    CropGrowTypeEnum,
+    CropTypeEnum,
+    ProductTypeEnum,
+)
 
 
 class Model(BaseModel):

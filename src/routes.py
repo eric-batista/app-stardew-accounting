@@ -1,7 +1,7 @@
 import fastapi
 from fastapi import HTTPException
-from src.accounting.routes import router as accounting_router
 
+from src.accounting.routes import router as accounting_router
 
 router = fastapi.APIRouter()
 router.include_router(accounting_router, prefix="/accounting")

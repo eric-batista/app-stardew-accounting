@@ -1,9 +1,12 @@
-from pydantic import BaseSettings
-from dotenv import load_dotenv
-from pathlib import Path
 import os
+from pathlib import Path
+
+from dotenv import load_dotenv
+from pydantic import BaseSettings
 
 load_dotenv()
+
+ROOT = Path(__file__).parent.parent
 
 
 class Settings(BaseSettings):
