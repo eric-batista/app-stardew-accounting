@@ -1,9 +1,11 @@
-from .routes import router
-from fastapi import FastAPI, APIRouter
+from fastapi import APIRouter, FastAPI
 from fastapi.responses import ORJSONResponse
+
+from src import __version__
 from src.core.settings import settings
 from src.routes import router
-from src import __version__
+
+from .routes import router
 
 
 def get_application():

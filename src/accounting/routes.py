@@ -1,7 +1,3 @@
 import fastapi
 
-
-router = fastapi.APIRouter(
-    tags=["Accounting"],
-    prefix="/accounting"
-)
+router = fastapi.APIRouter(tags=["Accounting"], prefix="/accounting")
