@@ -9,10 +9,10 @@ name: Veracode Static Analysis Pipeline Scan
 
 on:
   push:
-    branches: [ "master", "develop" ]
+    branches: [ master ]
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: [ "master" ]
+    branches: [ master ]
   schedule:
     - cron: '18 21 * * 3'
 
@@ -50,9 +50,11 @@ jobs:
       continue-on-error: true
     - name: Convert pipeline scan output to SARIF format
       id: convert
-      uses: veracode/veracode-pipeline-scan-results-to-sarif@ff08ae5b45d5384cb4679932f184c013d34da9be
+      uses: veracode/veracode-pipeline-scan-results-to-sarif@master
       with:
         pipeline-results-json: results.json
+        output-results-sarif: veracode-results.sarif
+        finding-rule-level: "4:3:0"
     - uses: github/codeql-action/upload-sarif@v2
       with:
         # Path to SARIF file relative to the root of the repository
