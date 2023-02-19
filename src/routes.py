@@ -1,12 +1,28 @@
 import fastapi
-from fastapi import HTTPException
+from devtools.providers.database import AsyncDatabaseProvider
+from fastapi import status as http_status
+from fastapi.responses import ORJSONResponse
 
-from src.accounting.routes import router as accounting_router
+from src.accounting.routes import router as accounting_routing
+from src.core.database import get_default_database
 
 router = fastapi.APIRouter()
-router.include_router(accounting_router, prefix="/accounting")
+router.include_router(accounting_routing)
 
 
 @router.get("/health-check")
-def health_check():
-    return HTTPException(status_code=200, detail={"health_check": True})
+async def healthcheck(
+    default_database: AsyncDatabaseProvider = fastapi.Depends(get_default_database),
+):
+    response = {
+        "status": True,
+        "database": await default_database.health_check(),
+    }
+
+    return (
+        response
+        if all(response.values())
+        else ORJSONResponse(
+            response, status_code=http_status.HTTP_503_SERVICE_UNAVAILABLE
+        )
+    )

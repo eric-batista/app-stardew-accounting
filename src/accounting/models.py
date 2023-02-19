@@ -1,6 +1,6 @@
 from typing import List
 
-from pydantic import BaseModel
+from devtools.models import Model
 
 from src.accounting.enum import (
     ArtisanGoodsTypeEnum,
@@ -8,12 +8,6 @@ from src.accounting.enum import (
     CropTypeEnum,
     ProductTypeEnum,
 )
-
-
-class Model(BaseModel):
-    id: str
-    name: str
-    description: str
 
 
 class ArtisanGoodsModel(Model):

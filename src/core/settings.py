@@ -1,29 +1,25 @@
-import os
-from pathlib import Path
+import pathlib
+import socket
 
-from dotenv import load_dotenv
-from pydantic import BaseSettings
+from devtools.config import Config
+from devtools.providers.config import from_env
+from devtools.providers.database import DatabaseConfig, Driver
 
-load_dotenv()
-
-ROOT = Path(__file__).parent.parent
-
-
-class Settings(BaseSettings):
-    ENV: str
-    BASE_PATH: str
-    DB_USER: str
-    DB_PASSWORD: str
-    DB_HOST: str
-
-    class Config:
-        case_sensitive = True
+config = Config()
 
 
-settings = Settings(
-    ENV=os.getenv("ENV"),
-    BASE_PATH=os.getenv("BASE_PATH"),
-    DB_HOST=os.getenv("DB_HOST"),
-    DB_USER=os.getenv("DB_USER"),
-    DB_PASSWORD=os.getenv("DB_PASSWORD"),
-)
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+BASE_DIR = ROOT.parent
+
+# APP SETUP
+BASE_PATH = config("BASE_PATH", str)
+APP_ENVIRONMENT = config("APP_ENVIRONMENT", str, "dev")
+APP_APPLICATION = config("APP_APPLICATION", str, "app-stardew-accounting")
+HOSTNAME = config("HOSTNAME", str, socket.gethostname())
+HOST = config("APP_DEFAULT_HOST", str, "0.0.0.0")
+PORT = config("APP_DEFAULT_PORT", int, 8000)
+
+DB_DRIVER = config("DB_DRIVER", Driver, Driver.POSTGRES)
+
+DEFAULT_DATABASE = "postgres"
+default_database = from_env(DatabaseConfig, driver=DB_DRIVER)

@@ -9,15 +9,15 @@ class RankTypeEnum(enum.Enum):
 
 
 class CropTypeEnum(RankTypeEnum):
-    pass
+    ...
 
 
 class ArtisanGoodsTypeEnum(RankTypeEnum):
-    pass
+    ...
 
 
 class ProductTypeEnum(RankTypeEnum):
-    pass
+    ...
 
 
 class CropGrowTypeEnum(enum.Enum):

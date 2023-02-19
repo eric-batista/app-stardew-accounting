@@ -1,10 +1,10 @@
 from uuid import UUID
 
 import sqlalchemy as sa
+from devtools.providers.database import Entity
 from sqlalchemy.orm import relationship
 
 from src.accounting.enum import ArtisanGoodsTypeEnum, CropGrowTypeEnum, CropTypeEnum
-from src.database.entity import Entity
 
 
 class Crops(Entity):
